@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="icon" type="image/x-icon" href="punkte_lade.gif">
+<head>
+    <style>img{position: absolute;left: 38%;top: 28%;}</style>
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warten...</title>
+</head>
+<body>
+    <img src="Bilder/Gifs/punkte_lade.gif" >
+    
+    
+    
+    <audio id="sound" src="töne/Havana Tralalero tralala Orginal song brainrot.mp3" preload="auto"></audio>
+
+<script>
+  const sound = document.getElementById('sound');
+  window.addEventListener('keydown', (event) => {
+    if(event.key.toLowerCase() === 'D') {
+      sound.currentTime = 0;
+      sound.play();
+    }
+  });
+
+  </script>
+
+
+</body>
+</html>

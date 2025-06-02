@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidiverse</title>
+    <link rel="icon" type="image/x-icon" href="Bilder/Icons/kgse_icon_vidiverse.ico">
+    <audio controls src="töne/goofy-ahh-car-horn-sound-effect.mp3"></audio>
+    <a href="login.html">Einloggen</a>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #00a2ff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+
+        .video {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 20%;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex-direction: row;
+            display: flex;
+        }
+
+        .video img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .video h2 {
+            font-size: 1.2em;
+            margin: 10px 0;
+            padding: 0 10px;
+        }
+
+        .video p {
+            color: #555;
+            padding: 0 10px;
+        }
+
+        .channel {
+            font-weight: bold;
+            color: #333;
+            padding: 0 15px;
+            min-width: 10px;
+        }
+
+        .views {
+            color: #888;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="Bilder/farbtest.jpg">
+        <h1>VIDIVERSE</h1>
+        <h1>Die Video-Webseite für das Drehtürprojekt der KGSE</h1>
+    </header>
+
+    <audio id="sound" src="töne/Havana Tralalero tralala Orginal song brainrot.mp3" preload="auto"></audio>
+
+<script>
+  const sound = document.getElementById('sound');
+  window.addEventListener('keydown', (event) => {
+    if(event.key.toLowerCase() === 'h') {
+      sound.currentTime = 0;
+      sound.play();
+    }
+  });
+  </script> 
+
+    </div>
+
+    <div class="container">
+        <div class="video">
+            <video width="600" height="409" id="videoPlayer" controls="controls">
+                <!-- MP4 Video -->
+                <source src="Videos/Drehtürprojekt_Info_KGSE_.mp4" type="video/mp4">
+               </video>
+               
+               
+               <script>
+                   var videoPlayer = document.getElementById('videoPlayer');
+               
+                   // Auto play, half volume.
+                   videoPlayer.play()
+                   videoPlayer.volume = 0.5;
+               
+                   // Play / pause.
+                   videoPlayer.addEventListener('click', function () {
+                       if (videoPlayer.paused == false) {
+                           videoPlayer.pause();
+                           videoPlayer.firstChild.nodeValue = 'Play';
+                       } else {
+                           videoPlayer.play();
+                           videoPlayer.firstChild.nodeValue = 'Pause';
+                       }
+                   });
+               </script>
+        
+        </div><div class="video">
+            <h2>Drehtürprojekt Info KGSE </h2>
+            <p class="channel">Das Dreh-
+                türprojekt an der KGSE</p>
+            <p class="views">20.03.2025  11:15 Uhr</p>
+        </div>
+       
+        <div class="video">
+            <img src="Bilder/Wurmlöcher_richtig.jpg" alt="Video 2">
+        
+        </div><div class="video">
+            <h2>Wurmlöcher<a href="Bilder/Wurmlöcher_richtig.jpg">  Ansehen</a></h2>
+            <p class="channel">Mahir Leyan</p>
+            <p class="views">1 Minute</p>
+        </div>
+    
+        <div class="video">
+            <img src="Bilder/Matti_Zauberstäbe_Thumbnail.jpg" alt="Video 2">
+            
+        </div><div class="video">
+            <h2>Die Harry 
+                Potter Zauberstäbe<a href="Bilder/PDF's/Matti_Zauberstäbe.pdf">  Ansehen</a></h2>
+            <p class="channel">Matti</p>
+            <p class="views">04.12.2023</p>
+        </div>
+        
+        <div class="video">
+            <img src="Bilder/farbtest.jpg" alt="Video 2">
+        
+        </div><div class="video">
+            <h2>NO MEDIA</h2>
+            <p class="channel">no media</p>
+            <p class="views">1 Minute</p>
+        </div>
+    
+        
+    </div>
+    </div>
+</body>
+
+</html>
