@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bieno.shop - Bieno Fidget Toy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            padding: 2em 1em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        header p {
+            margin: 0.5em 0 0;
+            font-weight: 300;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2em;
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2em;
+        }
+        .intro {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2em;
+        }
+        .intro a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .intro a:hover {
+            text-decoration: underline;
+        }
+        .product {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2em;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.2);
+        }
+        .product h2 {
+            margin-top: 0;
+            color: #4CAF50;
+            font-size: 1.8em;
+        }
+        .product p {
+            line-height: 1.6;
+        }
+        .buy-button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 1em 2em;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 700;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin-top: 1em;
+        }
+        .buy-button:hover {
+            background: linear-gradient(45deg, #45a049, #4CAF50);
+            transform: scale(1.05);
+        }
+        .contact-info {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 2em;
+        }
+        footer {
+            text-align: center;
+            padding: 1em;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        /* Chat Styles */
+        .chat-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .chat-window {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            height: 80%;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .chat-header {
+            background: #4CAF50;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 1em;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+        .message {
+            margin-bottom: 1em;
+            padding: 0.5em;
+            border-radius: 10px;
+        }
+        .message.bot {
+            background: #e0f7fa;
+            text-align: left;
+        }
+        .message.user {
+            background: #c8e6c9;
+            text-align: right;
+        }
+        .chat-input {
+            display: flex;
+            padding: 1em;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 0.5em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .chat-input button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 0.5em;
+        }
+        .close-chat {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        /* Login Styles */
+        .login-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-window {
+            background: white;
+            padding: 2em;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .login-window input {
+            width: 100%;
+            padding: 0.5em;
+            margin: 0.5em 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .login-window button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 0.5em;
+        }
+        .orders-list {
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            margin-top: 1em;
+        }
+        .order-item {
+            background: #f4f4f4;
+            padding: 0.5em;
+            margin-bottom: 0.5em;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .order-details {
+            flex: 1;
+        }
+        .shipped-button {
+            background: #FF5722;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .shipped-button:hover {
+            background: #D84315;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 1em;
+                grid-template-columns: 1fr;
+            }
+            .chat-window {
+                width: 95%;
+                height: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bieno.shop</h1>
+        <p>Entdecken Sie das Bieno Fidget Toy – Ihr perfekter Begleiter für Entspannung und Fokus</p>
+        <button class="buy-button" style="margin-top: 1em;" onclick="openLogin()">Master Login</button>
+    </header>
+    
+    <div class="container">
+        <div class="intro">
+            <h2>Unser Produkt: Bieno Fidget Toy</h2>
+            <p>Das Bieno Fidget Toy ist das ideale Spielzeug zum Entspannen und Fokussieren. Wir bieten zwei Modelle zur Auswahl: klein und groß. Wählen Sie Ihr Favorit und bestellen Sie bequem über unseren Chat!</p>
+            <p>Als Merch-Shop für Bieno bieten wir auch eine Verbindung zum <a href="https://bienogames.itch.io/bieno-game" target="_blank">Bieno Game</a> – spielen Sie das Spiel und entdecken Sie mehr!</p>
+        </div>
+        
+        <div class="product">
+            <h2>Bieno Fidget Toy - Klein</h2>
+            <p><strong>Beschreibung:</strong> Das kleine Modell ist kompakt und ideal für unterwegs. Perfekt für kurze Entspannungsmomente und passt in jede Tasche.</p>
+            <p><strong>Preis:</strong> Auf Anfrage (kontaktieren Sie uns per Chat)</p>
+            <button class="buy-button" onclick="startChat('klein')">Jetzt bestellen</button>
+        </div>
+        
+        <div class="product">
+            <h2>Bieno Fidget Toy - Groß</h2>
+            <p><strong>Beschreibung:</strong> Das große Modell bietet mehr Spielraum und ist ideal für längere Sitzungen zu Hause. Mehr Funktionen für maximale Entspannung.</p>
+            <p><strong>Preis:</strong> Auf Anfrage (kontaktieren Sie uns per Chat)</p>
+            <button class="buy-button" onclick="startChat('groß')">Jetzt bestellen</button>
+        </div>
+        
+        <div class="contact-info">
+            <p>Für Fragen oder Bestellungen nutzen Sie unseren integrierten Chat. Wir antworten Ihnen schnellstmöglich mit weiteren Informationen zu Preis und Versand.</p>
+        </div>
+    </div>
+    
+    <!-- Chat Container -->
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-window">
+            <div class="chat-header">
+                <span class="close-chat" onclick="closeChat()">&times;</span>
+                Bieno.shop Chat
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Nachricht eingeben..." onkeypress="handleKeyPress(event)">
+                <button onclick="sendMessage()">Senden</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Container -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-window">
+            <h3>Master Login</h3>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Passwort">
+            <button onclick="login()">Einloggen</button>
+            <button onclick="closeLogin()">Schließen</button>
+            <div class="orders-list" id="ordersList" style="display: none;">
+                <h4>Alle Bestellungen:</h4>
+                <!-- Orders will be populated here -->
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Bieno.shop. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+        let chatStep = 0;
+        let userEmail = '';
+        let selectedModel = '';
+        let quantity = 0;
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+        function startChat(model) {
+            selectedModel = model;
+            chatStep = 0;
+            document.getElementById('chatContainer').style.display = 'flex';
+            document.getElementById('chatMessages').innerHTML = '';
+            addMessage('bot', 'Hallo! Willkommen bei Bieno.shop. Ich helfe Ihnen bei Ihrer Bestellung des ' + model + 'en Bieno Fidget Toys. Bitte geben Sie Ihre E-Mail-Adresse an.');
+        }
+
+        function closeChat() {
+            document.getElementById('chatContainer').style.display = 'none';
+            chatStep = 0;
+        }
+
+        function addMessage(sender, text) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + sender;
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (text === '') return;
+            addMessage('user', text);
+            input.value = '';
+
+            if (chatStep === 0) {
+                userEmail = text;
+                chatStep = 1;
+                addMessage('bot', 'Danke! Ihre E-Mail ist ' + userEmail + '. Wie viele Stück möchten Sie bestellen? (Bitte eine Zahl eingeben)');
+            } else if (chatStep === 1) {
+                const qty = parseInt(text);
+                if (isNaN(qty) || qty <= 0) {
+                    addMessage('bot', 'Bitte geben Sie eine gültige Anzahl ein (z.B. 1, 2, 3...).');
+                    return;
+                }
+                quantity = qty;
+                chatStep = 2;
+                addMessage('bot', 'Sie möchten ' + quantity + ' Stück bestellen. Möchten Sie die Bestellung bestätigen? (Ja/Nein)');
+            } else if (chatStep === 2) {
+                if (text.toLowerCase() === 'ja') {
+                    const order = {
+                        email: userEmail,
+                        model: selectedModel,
+                        quantity: quantity,
+                        timestamp: new Date().toLocaleString()
+                    };
+                    orders.push(order);
+                    localStorage.setItem('orders', JSON.stringify(orders));
+                    addMessage('bot', 'Bestellung bestätigt! Wir senden Ihnen eine E-Mail mit weiteren Details.');
+                    setTimeout(() => closeChat(), 2000);
+                } else {
+                    addMessage('bot', 'Bestellung abgebrochen. Sie können den Chat schließen.');
+                }
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function openLogin() {
+            document.getElementById('loginContainer').style.display = 'flex';
+        }
+
+        function closeLogin() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('ordersList').style.display = 'none';
+        }
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'bieno bueno' && password === 'burger') {
+                document.getElementById('ordersList').style.display = 'block';
+                displayOrders();
+            } else {
+                alert('Falscher Username oder Passwort!');
+            }
+        }
+
+        function displayOrders() {
+            const ordersList = document.getElementById('ordersList');
+            ordersList.innerHTML = '<h4>Alle Bestellungen:</h4>';
+            if (orders.length === 0) {
+                ordersList.innerHTML += '<p>Keine Bestellungen vorhanden.</p>';
+            } else {
+                orders.forEach((order, index) => {
+                    const orderDiv = document.createElement('div');
+                    orderDiv.className = 'order-item';
+                    orderDiv.innerHTML = `
+                        <div class="order-details">
+                            <strong>E-Mail:</strong> ${order.email}<br>
+                            <strong>Modell:</strong> ${order.model}<br>
+                            <strong>Stückzahl:</strong> ${order.quantity}<br>
+                            <strong>Zeit:</strong> ${order.timestamp}
+                        </div>
+                        <button class="shipped-button" onclick="markAsShipped(${index})">Verschickt</button>
+                    `;
+                    ordersList.appendChild(orderDiv);
+                });
+            }
+        }
+
+        function markAsShipped(index) {
+            if (confirm('Sind Sie sicher, dass diese Bestellung verschickt wurde?')) {
+                orders.splice(index, 1);
+                localStorage.setItem('orders', JSON.stringify(orders));
+                displayOrders();
+            }
+        }
+    </script>
+</body>
+</html>
