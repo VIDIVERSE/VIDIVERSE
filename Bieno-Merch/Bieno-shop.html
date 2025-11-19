@@ -278,7 +278,7 @@
     <header>
         <h1>Bieno.shop</h1>
         <p>Entdecken Sie das Bieno Fidget Toy – Ihr perfekter Begleiter für Entspannung und Fokus</p>
-        <button class="buy-button" style="margin-top: 1em;" onclick="openLogin()">Master Login</button>
+        <button class="buy-button" style="margin-top: 1em;" onclick="openLogin()">Login</button>
     </header>
     
     <div class="container">
@@ -401,6 +401,7 @@
                     orders.push(order);
                     localStorage.setItem('orders', JSON.stringify(orders));
                     addMessage('bot', 'Bestellung bestätigt! Wir senden Ihnen eine E-Mail mit weiteren Details.');
+                    addMessage('bot', 'Danke das sie das Bieno figet unterschützen');
                     setTimeout(() => closeChat(), 2000);
                 } else {
                     addMessage('bot', 'Bestellung abgebrochen. Sie können den Chat schließen.');
@@ -467,3 +468,4 @@
     </script>
 </body>
 </html>
+
