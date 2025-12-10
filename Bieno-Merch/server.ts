@@ -1,5 +1,5 @@
 // server.ts
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
+import { serve } from "https://vidiverse-vidiverse-67.deno.dev/Bieno-Merch/Bieno-shop.html";
 
 serve(async (req) => {
   if (req.method === "POST" && new URL(req.url).pathname === "/order") {
@@ -34,5 +34,6 @@ serve(async (req) => {
 
   return new Response("Not Found", { status: 404 });
 }, { port: 8000 });
+
 
 console.log("Server läuft auf http://localhost:8000");
