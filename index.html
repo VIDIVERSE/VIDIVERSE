@@ -138,7 +138,7 @@ select option{background:var(--surface)}
 .btn-upload:hover{background:#5a52e8}.btn-upload:active{transform:scale(.99)}.btn-upload:disabled{background:#3a3a5a;cursor:not-allowed;box-shadow:none}
 .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
 .btn-upload.loading .spinner{display:block}
-.config-chip{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,107,107,.08);border:1px dashed rgba(255,107,107,.3);color:#ff8888;padding:.5rem 1rem;border-radius:8px;font-size:.78rem;margin-bottom:1.5rem;line-height:1.5}
+.config-chip{display:inline-flex;align-items:center;gap:.5rem;background:rgba(107,203,119,.08);border:1px dashed rgba(107,203,119,.3);color:#6bcb77;padding:.5rem 1rem;border-radius:8px;font-size:.78rem;margin-bottom:1.5rem;line-height:1.5}
 
 /* ABOUT */
 #page-about{padding-top:80px}
@@ -173,6 +173,7 @@ select option{background:var(--surface)}
   <div class="nav-links">
     <button class="nav-btn active-tab" id="nav-home" onclick="showPage('home')">Startseite</button>
     <button class="nav-btn" id="nav-about" onclick="showPage('about')">Über uns</button>
+    <button class="nav-btn" id="nav-impressum" onclick="showPage('impressum')">Impressum</button>
     <button class="nav-btn upload-btn" id="nav-upload" onclick="showPage('upload')">+ Projekt hochladen</button>
   </div>
 </nav>
@@ -238,7 +239,7 @@ select option{background:var(--surface)}
     </div>
 
     <div class="config-chip">
-      ⚙️ Bitte <strong>GITHUB_REPO</strong> im &lt;script&gt;-Bereich anpassen. Das GitHub Token wird als Passwort eingegeben.
+      ✅ Repository: VIDIVERSE/VIDIVERSE · Upload mit GitHub Token gesichert.
     </div>
 
     <div class="form-card">
@@ -277,9 +278,9 @@ select option{background:var(--surface)}
     <div class="form-card">
       <h3>Zugang</h3>
       <div class="field">
-        <label>Passwort (GitHub Personal Access Token) <span class="req">*</span></label>
+        <label>Passwort (optional — Token bereits hinterlegt)</label>
         <div class="pw-wrap">
-          <input type="password" id="u-pw" placeholder="ghp_..."/>
+          <input type="password" id="u-pw" placeholder="Optional: eigenes Token eingeben"/>
           <button class="pw-eye" type="button" onclick="togglePw()">👁</button>
         </div>
       </div>
@@ -291,6 +292,53 @@ select option{background:var(--surface)}
         <div class="spinner"></div>
         <span class="btn-text">Projekt hochladen →</span>
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- IMPRESSUM -->
+<div class="page" id="page-impressum">
+  <div class="about-container">
+    <h1><span class="grad">Impressum</span></h1>
+    <p class="lead">Die Projekt-Webseite für das Drehtürprojekt der KGSE</p>
+
+    <div class="about-card">
+      <h3>🏫 Diensteanbieter</h3>
+      <p>Erich Kästner Gemeinschaftsschule Elmshorn<br>
+      Hainholzer Damm 15<br>
+      25337 Elmshorn<br>
+      Deutschland</p>
+    </div>
+
+    <div class="about-card">
+      <h3>📬 Kontaktmöglichkeiten</h3>
+      <p>
+        <strong>E-Mail Schule:</strong> erich-kaestner-gemeinschaftsschule.elmshorn@schule.landsh.de<br>
+        <strong>E-Mail Website-Inhaber:</strong> jonathan.magnus.reinhardt@kgse-elmshorn.org<br>
+        <strong>Telefon:</strong> (04121) 47513-0<br>
+        <strong>Fax:</strong> (04121) 47513-50
+      </p>
+    </div>
+
+    <div class="about-card">
+      <h3>⚖️ Aufsichtsbehörde</h3>
+      <p>Schulträger (Diensteanbieter im Sinne des TDG / MDStV):<br>
+      Stadt Elmshorn – Der Bürgermeister<br>
+      Haupt- und Rechtsamt<br>
+      Schulstr. 15–17, 25335 Elmshorn<br>
+      Tel. (04121) 231-0 · Fax (04121) 22384<br><br>
+      <a href="https://www.elmshorn.de/Rathaus-Politik/Stadtverwaltung/%C3%84mter-Stabsstellen/%C3%84mter/Haupt-und-Rechtsamt/"
+         target="_blank" style="color:var(--accent)">www.elmshorn.de → Haupt- und Rechtsamt ↗</a></p>
+    </div>
+
+    <div class="about-card">
+      <h3>🤖 Vorbehalt der Nutzung für Text und Data Mining</h3>
+      <p>Der Inhaber dieser Website gestattet die Nutzung oder das Herunterladen von Inhalten dieser Website durch Dritte für die Entwicklung, das Training oder den Betrieb von künstlicher Intelligenz oder anderen maschinellen Lernsystemen („Text und Data Mining") ausschließlich mit ausdrücklicher schriftlicher Zustimmung des Inhabers. Ohne eine solche Zustimmung ist es untersagt, die Inhalte für Text und Data Mining zu verwenden. Dies gilt auch, wenn auf der Website keine Meta-Angaben vorhanden sind, die entsprechende Verfahren aussperren, und selbst dann, wenn Bots, die den Zweck haben, die Website zu Zwecken des Text und Data Mining auszulesen, nicht ausgesperrt werden.</p>
+    </div>
+
+    <div class="about-card">
+      <h3>🔗 Haftung für externe Links</h3>
+      <p>Unsere Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Zum Zeitpunkt der Verlinkung wurden die Seiten auf mögliche Rechtsverstöße überprüft; rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
     </div>
   </div>
 </div>
@@ -325,28 +373,159 @@ select option{background:var(--surface)}
 // ════════════════════════════════
 //  ⚙️  KONFIGURATION
 // ════════════════════════════════
-const GITHUB_REPO   = "DEIN_BENUTZERNAME/DEIN_REPOSITORY"; // z.B. "schule/drehtuer-projekte"
+const GITHUB_REPO   = "VIDIVERSE/VIDIVERSE";
 const UPLOAD_FOLDER = "projekte";
 const BRANCH        = "main";
 
-// ── DEMO PROJEKTE (ersetze durch echte GitHub-Daten) ──
-const DEMO_PROJECTS = [
-  {id:1,title:"Infovideo Drehtürprojekt KGSE",author:"Schulteam",class:"",type:"video",
-   desc:"Das offizielle Infovideo über das Drehtürprojekt an der KGSE.",date:"2024",
-   url:"Videos/Drehtürprojekt_Info_KGSE_2.mp4",thumb:null,external:false},
-  {id:2,title:"Wurmlöcher – Infozettel",author:"Mahir",class:"",type:"image",
-   desc:"Ein informativer Infozettel über Wurmlöcher und ihre physikalischen Eigenschaften.",date:"2024",
-   url:"Bilder/Wurmlöcher_Groß.jpg",thumb:"Bilder/Wurmlöcher_richtig.jpg",external:false},
-  {id:3,title:"Harry Potter Zauberstäbe",author:"Matti",class:"",type:"pdf",
-   desc:"Eine detaillierte Ausarbeitung über die Zauberstäbe aus der Harry-Potter-Welt.",date:"2024",
-   url:"Bilder/PDF's/Matti_Zauberstäbe.pdf",thumb:"Bilder/Matti_Zauberstäbe_Thumbnail.jpg",external:false},
-  {id:4,title:"Bieno Game",author:"Jonas",class:"",type:"game",
-   desc:"Ein selbst entwickeltes Videospiel, spielbar auf itch.io.",date:"2024",
-   url:"https://bienogames.itch.io/bieno-game",thumb:"Bilder/Bieno_Bild.PNG",external:true},
-];
-
-let allProjects = [...DEMO_PROJECTS];
+const GITHUB_TOKEN  = "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";
+let allProjects = [];
 let currentFilter = 'all';
+
+// ── GITHUB PROJEKTE LADEN ──
+async function loadProjectsFromGitHub() {
+  showLoadingState();
+  try {
+    // Alle Ordner im UPLOAD_FOLDER abrufen
+    const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${UPLOAD_FOLDER}?ref=${BRANCH}`;
+    const res = await fetch(apiUrl, {
+      headers: { Accept: "application/vnd.github+json", Authorization: `token ${GITHUB_TOKEN}` }
+    });
+
+    if (!res.ok) {
+      if (res.status === 404) {
+        // Ordner existiert noch nicht → leere Galerie
+        allProjects = [];
+        renderGrid(currentFilter);
+        return;
+      }
+      throw new Error('GitHub API: ' + res.status);
+    }
+
+    const folders = await res.json();
+    const projectFolders = folders.filter(f => f.type === 'dir');
+
+    const projects = await Promise.all(projectFolders.map(async (folder, i) => {
+      try {
+        // README.md des Projekts lesen
+        const readmeRes = await fetch(
+          `https://api.github.com/repos/${GITHUB_REPO}/contents/${folder.path}/README.md?ref=${BRANCH}`,
+          { headers: { Accept: "application/vnd.github+json", Authorization: `token ${GITHUB_TOKEN}` } }
+        );
+
+        // Alle Dateien im Ordner abrufen
+        const filesRes = await fetch(
+          `https://api.github.com/repos/${GITHUB_REPO}/contents/${folder.path}?ref=${BRANCH}`,
+          { headers: { Accept: "application/vnd.github+json", Authorization: `token ${GITHUB_TOKEN}` } }
+        );
+
+        let meta = { title: folder.name, author: '–', class: '', type: 'other', desc: '', date: '', link: '' };
+
+        if (readmeRes.ok) {
+          const readmeJson = await readmeRes.json();
+          const md = decodeURIComponent(escape(atob(readmeJson.content.replace(/\n/g, ''))));
+          meta = parseReadme(md);
+        }
+
+        // Erste nicht-README Datei als Hauptdatei
+        let mainFile = null;
+        let thumbFile = null;
+        if (filesRes.ok) {
+          const files = await filesRes.json();
+          const nonReadme = files.filter(f => f.type === 'file' && f.name.toLowerCase() !== 'readme.md');
+          if (nonReadme.length > 0) {
+            mainFile = nonReadme[0];
+            // Thumbnail: erstes Bild falls vorhanden
+            const imgFile = nonReadme.find(f => /\.(png|jpg|jpeg|gif|webp)$/i.test(f.name));
+            if (imgFile) thumbFile = imgFile;
+          }
+        }
+
+        // Datum aus Ordnername (Format: YYYY-MM-DD_...)
+        const dateMatch = folder.name.match(/^(\d{4}-\d{2}-\d{2})/);
+        const date = meta.date || (dateMatch ? dateMatch[1] : folder.name.substring(0,10));
+
+        const rawBase = `https://raw.githubusercontent.com/${GITHUB_REPO}/${BRANCH}/${folder.path}`;
+
+        return {
+          id: i + 1,
+          title: meta.title || folder.name,
+          author: meta.author || '–',
+          class: meta.class || '',
+          type: meta.type || guessType(mainFile ? mainFile.name : ''),
+          desc: meta.desc || '',
+          date,
+          url: meta.link
+            ? meta.link
+            : (mainFile ? `${rawBase}/${mainFile.name}` : ''),
+          thumb: thumbFile && meta.type !== 'image'
+            ? `${rawBase}/${thumbFile.name}`
+            : null,
+          external: !!meta.link && !mainFile,
+          folderPath: folder.path,
+          rawBase,
+        };
+      } catch (e) {
+        console.warn('Fehler bei Ordner', folder.name, e);
+        return null;
+      }
+    }));
+
+    allProjects = projects.filter(Boolean).reverse(); // Neueste zuerst
+    renderGrid(currentFilter);
+
+  } catch (err) {
+    console.error('Fehler beim Laden der Projekte:', err);
+    showErrorState(err.message);
+  }
+}
+
+function parseReadme(md) {
+  const get = (key) => {
+    const re = new RegExp(`\\*\\*${key}[^\\*]*\\*\\*[:\\s]+(.+)`, 'i');
+    const m = md.match(re);
+    return m ? m[1].trim() : '';
+  };
+  const titleMatch = md.match(/^#\s+(.+)/m);
+  const descMatch = md.match(/## Beschreibung\s+([\s\S]+?)(?:\n##|$)/i);
+  return {
+    title:  titleMatch ? titleMatch[1].trim() : '',
+    author: get('Schüler(?:\\/in)?'),
+    class:  get('Klasse'),
+    type:   get('Typ'),
+    desc:   descMatch ? descMatch[1].trim() : '',
+    date:   get('Datum'),
+    link:   get('Link'),
+  };
+}
+
+function guessType(filename) {
+  const ext = filename.split('.').pop().toLowerCase();
+  if (['pdf','doc','docx','ppt','pptx'].includes(ext)) return 'pdf';
+  if (['mp4','mov','avi','webm'].includes(ext)) return 'video';
+  if (['mp3','wav','ogg','flac'].includes(ext)) return 'audio';
+  if (['png','jpg','jpeg','gif','webp'].includes(ext)) return 'image';
+  return 'other';
+}
+
+function showLoadingState() {
+  const grid = document.getElementById('project-grid');
+  grid.innerHTML = `
+    <div class="empty-state" style="grid-column:1/-1">
+      <div style="font-size:2.5rem;margin-bottom:1rem;animation:spin 1.2s linear infinite;display:inline-block">⟳</div>
+      <p style="color:var(--text2)">Projekte werden geladen…</p>
+    </div>`;
+}
+
+function showErrorState(msg) {
+  const grid = document.getElementById('project-grid');
+  grid.innerHTML = `
+    <div class="empty-state" style="grid-column:1/-1">
+      <div class="empty-icon">⚠️</div>
+      <p style="color:var(--accent2);margin-bottom:.5rem">Projekte konnten nicht geladen werden.</p>
+      <p style="font-size:.8rem;color:var(--text3)">${msg}</p>
+      <p style="font-size:.8rem;color:var(--text3);margin-top:.5rem">GitHub API nicht erreichbar. Bitte Internetverbindung prüfen.</p>
+    </div>`;
+}
 
 const TYPE = {
   pdf:  {label:'PDF',cls:'type-pdf',emoji:'📄'},
@@ -476,12 +655,12 @@ function setProgress(pct,lbl){document.getElementById('upload-progress').style.d
 function slug(s){return s.trim().toLowerCase().replace(/[äÄ]/g,'ae').replace(/[öÖ]/g,'oe').replace(/[üÜ]/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
 function toB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(f)})}
 
-async function ghUp(token,path,content,msg){
+async function ghUp(path,content,msg){
   const url=`https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`;
   let sha;
-  try{const c=await fetch(url,{headers:{Authorization:`token ${token}`,Accept:'application/vnd.github+json'}});if(c.ok){const j=await c.json();sha=j.sha}}catch(e){}
+  try{const c=await fetch(url,{headers:{Authorization:`token ${GITHUB_TOKEN}`,Accept:'application/vnd.github+json'}});if(c.ok){const j=await c.json();sha=j.sha}}catch(e){}
   const body={message:msg,content,branch:BRANCH};if(sha)body.sha=sha;
-  const res=await fetch(url,{method:'PUT',headers:{Authorization:`token ${token}`,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+  const res=await fetch(url,{method:'PUT',headers:{Authorization:`token ${GITHUB_TOKEN}`,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
   if(!res.ok){const err=await res.json();throw new Error(err.message||'GitHub Fehler')}
   return res.json();
 }
@@ -493,7 +672,7 @@ async function handleUpload(){
   const type=document.getElementById('u-type').value;
   const desc=document.getElementById('u-desc').value.trim();
   const link=document.getElementById('u-link').value.trim();
-  const token=document.getElementById('u-pw').value.trim();
+  const token=document.getElementById('u-pw').value.trim()||GITHUB_TOKEN;
   if(!name){toast('Bitte Namen eingeben.','error');return}
   if(!title){toast('Bitte Projekttitel eingeben.','error');return}
   if(!token){toast('Bitte Passwort eingeben.','error');return}
@@ -504,11 +683,11 @@ async function handleUpload(){
   const folder=`${UPLOAD_FOLDER}/${date}_${slug(name)}_${slug(title)}`;
   try{
     const meta=`# ${title}\n\n**Schüler/in:** ${name}${cls?'  |  **Klasse:** '+cls:''}\n**Datum:** ${date}\n**Typ:** ${type}${link?'\n**Link:** '+link:''}\n${desc?'\n## Beschreibung\n'+desc:''}`;
-    await ghUp(token,`${folder}/README.md`,btoa(unescape(encodeURIComponent(meta))),`Drehtür: ${title} – ${name}`);
+    await ghUp(`${folder}/README.md`,btoa(unescape(encodeURIComponent(meta))),`Drehtür: ${title} – ${name}`);
     for(let i=0;i<selectedFiles.length;i++){
       const f=selectedFiles[i];
       setProgress(Math.round((i/selectedFiles.length)*90),`Lade hoch: ${f.name}`);
-      await ghUp(token,`${folder}/${f.name}`,await toB64(f),`Upload: ${f.name} – ${title}`);
+      await ghUp(`${folder}/${f.name}`,await toB64(f),`Upload: ${f.name} – ${title}`);
     }
     setProgress(100,'Fertig! ✓');
     toast('✅ Erfolgreich hochgeladen!','success');
@@ -522,6 +701,7 @@ async function handleUpload(){
       document.getElementById('upload-progress').style.display='none';
       btn.disabled=false;btn.classList.remove('loading');
       showPage('home');
+      loadProjectsFromGitHub(); // Projekte neu laden
       toast('🎉 Dein Projekt ist jetzt sichtbar!','success');
     },2000);
   }catch(err){
@@ -531,7 +711,7 @@ async function handleUpload(){
 }
 
 // INIT
-renderGrid('all');
+loadProjectsFromGitHub();
 </script>
 </body>
 </html>
