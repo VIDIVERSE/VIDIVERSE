@@ -672,7 +672,9 @@ async function handleUpload(){
   const type=document.getElementById('u-type').value;
   const desc=document.getElementById('u-desc').value.trim();
   const link=document.getElementById('u-link').value.trim();
-  const token=document.getElementById('u-pw').value.trim();
+  const token=document.getElementById("u-pw").value.trim();
+  if(!token){toast("Bitte Token eingeben.","error");return}
+  uploadToken = token;
   if(!name){toast('Bitte Namen eingeben.','error');return}
   if(!title){toast('Bitte Projekttitel eingeben.','error');return}
   if(!token){toast('Bitte Passwort eingeben.','error');return}
