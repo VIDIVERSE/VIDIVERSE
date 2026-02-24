@@ -382,6 +382,60 @@ let allProjects = [];
 let currentFilter = 'all';
 
 // ── GITHUB PROJEKTE LADEN ──
+// ── ALTE PROJEKTE (immer sichtbar) ──
+function getLegacyProjects() {
+  return [
+    {
+      id: 9001,
+      title: "Infovideo Drehtürprojekt KGSE",
+      author: "Schulteam",
+      class: "",
+      type: "video",
+      desc: "Das offizielle Infovideo über das Drehtürprojekt an der KGSE.",
+      date: "2024",
+      url: "https://raw.githubusercontent.com/VIDIVERSE/VIDIVERSE/main/Videos/Dreht%C3%BCrprojekt_Info_KGSE_2.mp4",
+      thumb: null,
+      external: false
+    },
+    {
+      id: 9002,
+      title: "Wurmlöcher – Infozettel",
+      author: "Mahir",
+      class: "",
+      type: "image",
+      desc: "Ein informativer Infozettel über Wurmlöcher und ihre physikalischen Eigenschaften.",
+      date: "2024",
+      url: "https://raw.githubusercontent.com/VIDIVERSE/VIDIVERSE/main/Bilder/Wurml%C3%B6cher_Gro%C3%9F.jpg",
+      thumb: "https://raw.githubusercontent.com/VIDIVERSE/VIDIVERSE/main/Bilder/Wurml%C3%B6cher_richtig.jpg",
+      external: false
+    },
+    {
+      id: 9003,
+      title: "Harry Potter Zauberstäbe",
+      author: "Matti",
+      class: "",
+      type: "pdf",
+      desc: "Eine detaillierte Ausarbeitung über die Zauberstäbe aus der Harry-Potter-Welt.",
+      date: "2024",
+      url: "https://raw.githubusercontent.com/VIDIVERSE/VIDIVERSE/main/Bilder/PDF's/Matti_Zauberst%C3%A4be.pdf",
+      thumb: "https://raw.githubusercontent.com/VIDIVERSE/VIDIVERSE/main/Bilder/Matti_Zauberst%C3%A4be_Thumbnail.jpg",
+      external: false
+    },
+    {
+      id: 9004,
+      title: "Bieno Game",
+      author: "Jonas",
+      class: "",
+      type: "game",
+      desc: "Ein selbst entwickeltes Videospiel, spielbar auf itch.io.",
+      date: "2024",
+      url: "https://bienogames.itch.io/bieno-game",
+      thumb: "https://raw.githubusercontent.com/VIDIVERSE/VIDIVERSE/main/Bilder/Bieno_Bild.PNG",
+      external: true
+    }
+  ];
+}
+
 async function loadProjectsFromGitHub() {
   showLoadingState();
   try {
@@ -394,7 +448,7 @@ async function loadProjectsFromGitHub() {
     if (!res.ok) {
       if (res.status === 404) {
         // Ordner existiert noch nicht → leere Galerie
-        allProjects = [];
+        allProjects = getLegacyProjects();
         renderGrid(currentFilter);
         return;
       }
@@ -470,7 +524,9 @@ async function loadProjectsFromGitHub() {
       }
     }));
 
-    allProjects = projects.filter(Boolean).reverse(); // Neueste zuerst
+    const newProjects = projects.filter(Boolean).reverse();
+    const legacyProjects = getLegacyProjects();
+    allProjects = [...newProjects, ...legacyProjects];
     renderGrid(currentFilter);
 
   } catch (err) {
