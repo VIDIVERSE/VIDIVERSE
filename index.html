@@ -138,7 +138,7 @@ select option{background:var(--surface)}
 .btn-upload:hover{background:#5a52e8}.btn-upload:active{transform:scale(.99)}.btn-upload:disabled{background:#3a3a5a;cursor:not-allowed;box-shadow:none}
 .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none}
 .btn-upload.loading .spinner{display:block}
-.config-chip{display:inline-flex;align-items:center;gap:.5rem;background:rgba(107,203,119,.08);border:1px dashed rgba(107,203,119,.3);color:#6bcb77;padding:.5rem 1rem;border-radius:8px;font-size:.78rem;margin-bottom:1.5rem;line-height:1.5}
+.config-chip{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,107,107,.08);border:1px dashed rgba(255,107,107,.3);color:#ff8888;padding:.5rem 1rem;border-radius:8px;font-size:.78rem;margin-bottom:1.5rem;line-height:1.5}
 
 /* ABOUT */
 #page-about{padding-top:80px}
@@ -239,7 +239,7 @@ select option{background:var(--surface)}
     </div>
 
     <div class="config-chip">
-      ✅ Repository: VIDIVERSE/VIDIVERSE · Upload mit GitHub Token gesichert.
+      ⚙️ Repository: VIDIVERSE/VIDIVERSE · Token beim Upload eingeben (wird nicht gespeichert)
     </div>
 
     <div class="form-card">
@@ -278,9 +278,9 @@ select option{background:var(--surface)}
     <div class="form-card">
       <h3>Zugang</h3>
       <div class="field">
-        <label>Passwort (optional — Token bereits hinterlegt)</label>
+        <label>Passwort (GitHub Personal Access Token)</label>
         <div class="pw-wrap">
-          <input type="password" id="u-pw" placeholder="Optional: eigenes Token eingeben"/>
+          <input type="password" id="u-pw" placeholder="github_pat_..."/>
           <button class="pw-eye" type="button" onclick="togglePw()">👁</button>
         </div>
       </div>
@@ -377,7 +377,7 @@ const GITHUB_REPO   = "VIDIVERSE/VIDIVERSE";
 const UPLOAD_FOLDER = "projekte";
 const BRANCH        = "main";
 
-const GITHUB_TOKEN  = "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";
+let uploadToken = "";  // Token wird beim Upload eingegeben, nie gespeichert
 let allProjects = [];
 let currentFilter = 'all';
 
@@ -388,7 +388,7 @@ async function loadProjectsFromGitHub() {
     // Alle Ordner im UPLOAD_FOLDER abrufen
     const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${UPLOAD_FOLDER}?ref=${BRANCH}`;
     const res = await fetch(apiUrl, {
-      headers: { Accept: "application/vnd.github+json", Authorization: `token ${GITHUB_TOKEN}` }
+      headers: { Accept: "application/vnd.github+json" }
     });
 
     if (!res.ok) {
@@ -409,13 +409,13 @@ async function loadProjectsFromGitHub() {
         // README.md des Projekts lesen
         const readmeRes = await fetch(
           `https://api.github.com/repos/${GITHUB_REPO}/contents/${folder.path}/README.md?ref=${BRANCH}`,
-          { headers: { Accept: "application/vnd.github+json", Authorization: `token ${GITHUB_TOKEN}` } }
+          { headers: { Accept: "application/vnd.github+json" } }
         );
 
         // Alle Dateien im Ordner abrufen
         const filesRes = await fetch(
           `https://api.github.com/repos/${GITHUB_REPO}/contents/${folder.path}?ref=${BRANCH}`,
-          { headers: { Accept: "application/vnd.github+json", Authorization: `token ${GITHUB_TOKEN}` } }
+          { headers: { Accept: "application/vnd.github+json" } }
         );
 
         let meta = { title: folder.name, author: '–', class: '', type: 'other', desc: '', date: '', link: '' };
@@ -658,9 +658,9 @@ function toB64(f){return new Promise((res,rej)=>{const r=new FileReader();r.onlo
 async function ghUp(path,content,msg){
   const url=`https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`;
   let sha;
-  try{const c=await fetch(url,{headers:{Authorization:`token ${GITHUB_TOKEN}`,Accept:'application/vnd.github+json'}});if(c.ok){const j=await c.json();sha=j.sha}}catch(e){}
+  try{const c=await fetch(url,{headers:{Authorization:`token ${uploadToken}`,Accept:'application/vnd.github+json'}});if(c.ok){const j=await c.json();sha=j.sha}}catch(e){}
   const body={message:msg,content,branch:BRANCH};if(sha)body.sha=sha;
-  const res=await fetch(url,{method:'PUT',headers:{Authorization:`token ${GITHUB_TOKEN}`,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+  const res=await fetch(url,{method:'PUT',headers:{Authorization:`token ${uploadToken}`,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
   if(!res.ok){const err=await res.json();throw new Error(err.message||'GitHub Fehler')}
   return res.json();
 }
@@ -672,7 +672,7 @@ async function handleUpload(){
   const type=document.getElementById('u-type').value;
   const desc=document.getElementById('u-desc').value.trim();
   const link=document.getElementById('u-link').value.trim();
-  const token=document.getElementById('u-pw').value.trim()||GITHUB_TOKEN;
+  const token=document.getElementById('u-pw').value.trim();
   if(!name){toast('Bitte Namen eingeben.','error');return}
   if(!title){toast('Bitte Projekttitel eingeben.','error');return}
   if(!token){toast('Bitte Passwort eingeben.','error');return}
@@ -715,4 +715,3 @@ loadProjectsFromGitHub();
 </script>
 </body>
 </html>
-
